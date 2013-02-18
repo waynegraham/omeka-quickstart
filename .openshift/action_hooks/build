@@ -3,3 +3,33 @@
 # available.  Otherwise it will execute while your application is stopped
 # before the deploy step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
+
+# Make sure all the user-generated data directories exist
+
+if [ ! -d $OPENSHIFT_DATA_DIR/fullsize ]; then 
+    mkdir $OPENSHIFT_DATA_DIR/fullsize 
+fi
+
+if [ ! -d $OPENSHIFT_DATA_DIR/original ]; then
+    mkdir $OPENSHIFT_DATA_DIR/original
+fi
+
+if [ ! -d $OPENSHIFT_DATA_DIR/square_thumbnails ]; then
+    mkdir $OPENSHIFT_DATA_DIR/square_thumbnails
+fi
+
+if [ ! -d $OPENSHIFT_DATA_DIR/theme_uploads ]; then
+    mkdir $OPENSHIFT_DATA_DIR/theme_uploads
+fi
+
+if [ ! -d $OPENSHIFT_DATA_DIR/thumbnails ]; then
+    mkdir $OPENSHIFT_DATA_DIR/thumbnails
+fi
+
+#create symbolic links
+ln -sf $OPENSHIFT_DATA_DIR/fullsize $OPENSHIFT_REPO_DIR/php/files/
+ln -sf $OPENSHIFT_DATA_DIR/original $OPENSHIFT_REPO_DIR/php/files/
+ln -sf $OPENSHIFT_DATA_DIR/square_thumbnails $OPENSHIFT_REPO_DIR/php/files/
+ln -sf $OPENSHIFT_DATA_DIR/theme_uploads $OPENSHIFT_REPO_DIR/php/files/
+ln -sf $OPENSHIFT_DATA_DIR/thumbnails $OPENSHIFT_REPO_DIR/php/files/
+
