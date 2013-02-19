@@ -30,8 +30,5 @@ Omeka is a free, flexible, and open source web-publishing platform for the displ
      git push
      ```
 
-1. Start using your Omeka 2.0 application!
+1. Visit appName-yourNamespace.rhcloud.com/install to setup your site!
 
-    Default Admin username: Administrator
-    
-    Default Admin password: OpenShiftAdmin
