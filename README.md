@@ -31,5 +31,7 @@ Omeka is a free, flexible, and open source web-publishing platform for the displ
      ```
 
 1. Start using your Omeka 2.0 application!
-     Default Admin username: Administrator
-     Default Admin password: OpenShiftAdmin
+
+    Default Admin username: Administrator
+    
+    Default Admin password: OpenShiftAdmin
