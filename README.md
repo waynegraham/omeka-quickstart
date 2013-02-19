@@ -32,3 +32,6 @@ Omeka is a free, flexible, and open source web-publishing platform for the displ
 
 1. Visit appName-yourNamespace.rhcloud.com/install to setup your site!
 
+### Adding Themes ###
+You can find theme packages at http://omeka.org/add-ons/themes/ 
+click on the theme image to make sure it will work with Omeka 2.0
