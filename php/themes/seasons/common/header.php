@@ -2,6 +2,7 @@
 <html class="<?php echo get_theme_option('Style Sheet'); ?>" lang="<?php echo get_html_lang(); ?>">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php if ($description = option('description')): ?>
     <meta name="description" content="<?php echo $description; ?>">
     <?php endif; ?>
@@ -16,6 +17,7 @@
     <!-- Stylesheets -->
     <?php
     queue_css_url('http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic');
+    queue_css_file('normalize');
     queue_css_file('style');
     echo head_css();
     ?>
