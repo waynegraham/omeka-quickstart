@@ -17,7 +17,7 @@ Omeka is a free, flexible, and open source web-publishing platform for the displ
      rhc cartridge add -a omeka -c mysql-5.1
      ```
 
-1. Add this upstream Omeka 2.0 quickstart repository
+1. Add this upstream Omeka quickstart repository
      
      ```
      cd omeka
@@ -34,4 +34,4 @@ Omeka is a free, flexible, and open source web-publishing platform for the displ
 
 ### Adding Themes ###
 You can find theme packages at http://omeka.org/add-ons/themes/ 
-click on the theme image to make sure it will work with Omeka 2.0
+click on the theme image to make sure it will work with this version of Omeka.
