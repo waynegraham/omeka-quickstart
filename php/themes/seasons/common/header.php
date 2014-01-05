@@ -7,7 +7,13 @@
     <meta name="description" content="<?php echo $description; ?>">
     <?php endif; ?>
 
-    <title><?php echo option('site_title'); echo isset($title) ? ' | ' . strip_formatting($title) : ''; ?></title>
+    <?php
+    if (isset($title)) {
+        $titleParts[] = strip_formatting($title);
+    }
+    $titleParts[] = option('site_title');
+    ?>
+    <title><?php echo implode(' &middot; ', $titleParts); ?></title>
 
     <?php echo auto_discovery_link_tags(); ?>
 
@@ -16,9 +22,10 @@
 
     <!-- Stylesheets -->
     <?php
-    queue_css_url('http://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic');
+    queue_css_url('//fonts.googleapis.com/css?family=Ubuntu:300,400,500,700,300italic,400italic,500italic,700italic');
     queue_css_file('normalize');
-    queue_css_file('style');
+    queue_css_file('style', 'screen');
+    queue_css_file('print', 'print');
     echo head_css();
     ?>
 

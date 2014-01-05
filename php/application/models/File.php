@@ -11,7 +11,7 @@
  * 
  * @package Omeka\Record
  */
-class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface 
+class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Interface
 {
     /**
      * Option name for whether the file validation is disabled.
@@ -266,14 +266,8 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
      */
     public function getDerivativeFilename()
     {
-        $filename = basename($this->filename);
-        $parts = explode('.', $filename);
-        // One or more . in the filename, pop the last section to be replaced.
-        if (count($parts) > 1) {
-            $ext = array_pop($parts);
-        }
-        array_push($parts, self::DERIVATIVE_EXT);
-        return join('.', $parts);
+        $base = pathinfo($this->filename, PATHINFO_EXTENSION) ? substr($this->filename, 0, strrpos($this->filename, '.')) : $this->filename;
+        return $base . '.' . self::DERIVATIVE_EXT;
     }
     
     /**
@@ -396,6 +390,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
                 $metadata[$key] = $id3->info[$key];
             }
         }
+        
         $this->metadata = json_encode($metadata);      
         return true;
     }
@@ -487,7 +482,7 @@ class File extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         }
         return $this->_storage;
     }
-
+    
     /**
      * Get the ACL resource ID for the record.
      *

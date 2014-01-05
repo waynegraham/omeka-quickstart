@@ -75,7 +75,7 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
         'Files' => 'getFiles',
         'Elements' => 'getElements',
         'ItemTypeElements' => 'getItemTypeElements',
-        'ElementTexts' => 'getElementText'
+        'ElementTexts' => 'getAllElementTexts'
     );
     
     /**
@@ -504,5 +504,18 @@ class Item extends Omeka_Record_AbstractRecord implements Zend_Acl_Resource_Inte
     public function getResourceId()
     {
         return 'Items';
+    }
+    
+    /**
+     * Validate this item.
+     */
+    protected function _validate() {
+        $db = $this->getDb();
+        if (null !== $this->item_type_id && !$db->getTable('ItemType')->exists($this->item_type_id)) {
+            $this->addError('item_type_id', __('Invalid item type.'));
+        }
+        if (null !== $this->collection_id && !$db->getTable('Collection')->exists($this->collection_id)) {
+            $this->addError('collection_id', __('Invalid collection.'));
+        }
     }
 }

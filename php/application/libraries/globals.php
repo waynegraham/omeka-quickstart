@@ -871,12 +871,12 @@ function __($string)
 {
     // Avoid getting the translate object more than once.
     static $translate;
-    
+
     if (!isset($translate)) {
         try {
             $translate = Zend_Registry::get('Zend_Translate');
         } catch (Zend_Exception $e) {
-            $translate = false;
+            $translate = null;
         }
     }
     
@@ -1118,8 +1118,8 @@ function head_js($includeDefaults = true)
             $headScript->prependFile(src('vendor/jquery-ui', $dir, 'js'))
                        ->prependFile(src('vendor/jquery', $dir, 'js'));
         } else {
-            $headScript->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js')
-                       ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js');
+            $headScript->prependFile('//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js')
+                       ->prependFile('//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js');
         }
     }
     return $headScript;
@@ -1690,6 +1690,21 @@ function get_records($recordType, $params = array(), $limit = 10)
 }
 
 /**
+ * Get a single record from the database.
+ *
+ * @package Omeka\Function\Db
+ * @uses Omeka_Db_Table::findBy
+ * @param string $recordType Type of records to get.
+ * @param array $params Array of search parameters for records.
+ * @return object An object of result records (of $recordType).
+ */
+function get_record($recordType, $params = array())
+{
+    $record = get_records($recordType, $params, 1);
+    return reset($record);
+}
+
+/**
  * Return the total number of a given type of record in the database.
  *
  * @package Omeka\Function\Db
@@ -2233,7 +2248,7 @@ function link_to($record, $action = null, $text = null, $props = array(), $query
 {
     // If we're linking directly to a record, use the URI for that record.
     if ($record instanceof Omeka_Record_AbstractRecord) {
-        $url = record_url($record, $action);
+        $url = record_url($record, $action, false, $queryParams);
     // Otherwise $record is the name of the controller to link to.
     } else {
         $urlOptions = array();
@@ -2857,10 +2872,21 @@ function text_to_id($text, $prepend = null, $delimiter = '-')
  */
 function url_to_link($str)
 {
-    $pattern = "/(\bhttps?:\/\/\S+\b)/e";
-    $replace = '"<a href=\"".htmlspecialchars("$1")."\">$1</a>"';
-    $str = preg_replace($pattern, $replace, $str);
-    return $str;
+    $pattern = "#(\bhttps?://\S+\b)#";
+    return preg_replace_callback($pattern, 'url_to_link_callback', $str);
+}
+
+/**
+ * Callback for converting URLs with url_to_link.
+ *
+ * @package Omeka\Function\Text
+ * @see url_to_link
+ * @param array $matches preg_replace_callback matches array
+ * @return string
+ */
+function url_to_link_callback($matches)
+{
+    return '<a href="' . htmlspecialchars($matches[1]) . '">' . $matches[1] . '</a>';
 }
 
 /**
@@ -3103,11 +3129,12 @@ function is_current_url($url)
  * @param Omeka_Record_AbstractRecord|string $record
  * @param string|null $action
  * @param bool $getAbsoluteUrl
+ * @param array $queryParams
  * @return string
  */
-function record_url($record, $action = null, $getAbsoluteUrl = false)
+function record_url($record, $action = null, $getAbsoluteUrl = false, $queryParams = array())
 {
-    return get_view()->recordUrl($record, $action, $getAbsoluteUrl);
+    return get_view()->recordUrl($record, $action, $getAbsoluteUrl, $queryParams);
 }
 
 /**
