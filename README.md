@@ -8,7 +8,7 @@ Omeka is a free, flexible, and open source web-publishing platform for the displ
 1. Create a PHP application
 
     ```
-    rhc app create -a omeka -t php-5.3
+    rhc app create -a omeka -t php-5.4
     ```
 
 1. Add mysql support to your application
