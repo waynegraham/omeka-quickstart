@@ -1,0 +1,18 @@
+[submodule "php/plugins/Neatline"]
+	path = php/plugins/Neatline
+	url = https://github.com/scholarslab/Neatline.git
+[submodule "php/plugins/NeatlineText"]
+	path = php/plugins/NeatlineText
+	url = https://github.com/scholarslab/nl-widget-Text.git
+[submodule "php/plugins/NeatlineSimile"]
+	path = php/plugins/NeatlineSimile
+	url = https://github.com/scholarslab/nl-widget-Simile.git
+[submodule "php/plugins/NeatlineWaypoints"]
+	path = php/plugins/NeatlineWaypoints
+	url = https://github.com/scholarslab/nl-widget-Waypoints.git
+[submodule "php/themes/astrolabe"]
+	path = php/themes/astrolabe
+	url = https://github.com/scholarslab/astrolabe.git
+[submodule "php/themes/neatscape"]
+	path = php/themes/neatscape
+	url = https://github.com/scholarslab/neatscape.git
