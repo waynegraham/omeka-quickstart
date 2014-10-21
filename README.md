@@ -21,7 +21,7 @@ Omeka is a free, flexible, and open source web-publishing platform for the displ
      
      ```
      cd omeka
-     git remote add upstream -m master git://github.com/loudWhale/omeka-quickstart.git
+     git remote add upstream -m master git://github.com/waynegraham/omeka-quickstart.git
      git pull -s recursive -X theirs upstream master
      ```
 1. Push the quickstart code to your Openshift application
